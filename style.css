@@ -1,26 +1,52 @@
 :root {
-    --bg-gradient: linear-gradient(135deg, #fdf2f8 0%, #f5f3ff 50%, #ecfeff 100%);
-    --card-bg: rgba(255, 255, 255, 0.9);
+    /* กำหนดสีพาสเทลหลักสำหรับ Animation */
+    --color-pink: #fdf2f8;   /* ชมพูอ่อนมาก */
+    --color-purple: #f5f3ff; /* ม่วงอ่อนมาก */
+    --color-blue: #ecfeff;   /* ฟ้าอ่อนมาก */
+    
+    --card-bg: rgba(255, 255, 255, 0.95); /* เพิ่มความทึบแสงให้ Card เด่นขึ้น */
     --accent-pink: #fbcfe8;
     --accent-purple: #e9d5ff;
     --accent-blue: #a5f3fc;
     --primary-btn: #818cf8; /* สีม่วงน้ำเงิน */
 }
 
+/* --- ส่วนที่แก้ไข: Animated Gradient Background --- */
 body {
     font-family: 'Kanit', sans-serif;
-    background: var(--bg-gradient);
     margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     color: #4b5563;
+    
+    /* กำหนดพื้นหลังเป็น Gradient ขนาดใหญ่ */
+    background: linear-gradient(-45deg, var(--color-pink), var(--color-purple), var(--color-blue), #ffffff);
+    background-size: 400% 400%; /* ขยายขนาดเพื่อให้เคลื่อนไหวได้ */
+    
+    /* เรียกใช้งาน Animation ชื่อ 'gradientBG' */
+    animation: gradientBG 15s ease infinite; 
 }
+
+/* กำหนดการเคลื่อนไหวของ Gradient */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* ----------------------------------------------- */
 
 .app-container {
     width: 100%;
     max-width: 550px;
     padding: 2rem 1rem;
+    z-index: 1; /* ให้เนื้อหาอยู่บนพื้นหลัง */
 }
 
 .app-header h1 {
@@ -41,6 +67,7 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     border: 2px solid white;
     margin-bottom: 2rem;
+    backdrop-filter: blur(5px); /* เพิ่มลูกเล่นเบลอหลัง Card นิดหน่อย */
 }
 
 .input-group { display: flex; flex-direction: column; gap: 12px; }
@@ -51,6 +78,7 @@ input {
     border-radius: 12px;
     outline: none;
     transition: 0.3s;
+    background-color: rgba(255, 255, 255, 0.8); /* ให้ Input ดูโปร่งแสงนิดๆ */
 }
 
 input:focus { border-color: var(--primary-btn); box-shadow: 0 0 10px rgba(129, 140, 248, 0.2); }
@@ -70,7 +98,7 @@ button {
 button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(129, 140, 248, 0.4); }
 
 .task-item {
-    background: white;
+    background: rgba(255, 255, 255, 0.9); /* ให้ Task Item โปร่งแสงนิดๆ */
     margin-bottom: 12px;
     padding: 15px;
     border-radius: 15px;
@@ -79,6 +107,7 @@ button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(129, 140
     align-items: center;
     border-left: 10px solid var(--accent-color); /* สุ่มสีตามวิชา */
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    backdrop-filter: blur(3px); /* เพิ่มลูกเล่นเบลอหลัง Task Item */
 }
 
 .subject-tag {
